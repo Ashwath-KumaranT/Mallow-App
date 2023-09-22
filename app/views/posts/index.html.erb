@@ -1,0 +1,80 @@
+<h1>Posts</h1>
+
+<table class="posts-table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>View the post</th>
+    <th>Update the post</th>
+    <th>Destroy the post</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.post_title %></td>
+      <td><%= post.post_content %></td>
+      <td>
+        <%= link_to 'Show', post, class: 'action-link' %>
+      </td>
+       <td> <%= link_to 'Edit', edit_post_path(post), class: 'action-link' %>
+       </td>
+      <td>
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'action-link' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Post', new_post_path, class: 'btn' %>
+
+<style>
+    /* CSS for the table */
+    .posts-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .posts-table th, .posts-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .posts-table th {
+        background-color: #f2f2f2;
+    }
+
+    /* CSS for action links */
+    .action-link {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        background-color: #007BFF;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .action-link:hover {
+        background-color: #0056b3;
+    }
+
+    /* CSS for the "New Post" button */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+</style>

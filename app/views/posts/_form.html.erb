@@ -1,0 +1,19 @@
+<%= form_for([@topic, @post]) do |f| %>
+  <div class="form-field">
+    <%= f.label :post_title %>
+    <%= f.text_field :post_title %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :post_content %>
+    <%= f.text_area :post_content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Create post" %>
+  </div>
+
+  <% end %>
+
+
+

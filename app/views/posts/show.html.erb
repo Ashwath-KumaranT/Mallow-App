@@ -1,0 +1,4 @@
+<h1> Post title : <%= @post.post_title %></h1>
+<p>Post content : <%= @post.post_content %></p>
+<p>Topic of this post : <%= @post.topic.title %></p>
+<%= link_to 'New Post', new_topic_post_path(@post) %>
