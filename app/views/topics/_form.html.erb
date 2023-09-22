@@ -1,0 +1,64 @@
+<%= form_for(@topic) do |f| %>
+  <div class="form-field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+<style>
+    /* CSS for the form container */
+    .form-container {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    /* CSS for form fields */
+    .form-field {
+        margin-bottom: 15px;
+    }
+
+    .form-field label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-field input[type="text"],
+    .form-field textarea {
+        width: 25%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* CSS for the submit button */
+    .form-actions {
+        text-align: center;
+    }
+
+    .form-actions input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form-actions input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+</style>

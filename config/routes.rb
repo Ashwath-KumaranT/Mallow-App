@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :topics, except: [:show]
+  # get 'topics/:id', to: 'topics#show', as: :topic
+  # delete 'topics/:id', to: 'topics#destroy', as: :delete_topic
+
 end
