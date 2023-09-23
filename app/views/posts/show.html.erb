@@ -4,6 +4,36 @@
 <%= button_to "Destroy this post", topic_post_path(@post.topic, @post), method: :delete, class: "btn btn-danger"%>
 <%= link_to "Back to Posts", topic_posts_path(@post.topic) %>
 
+<h2>Existing Ratings:</h2>
+<% (1..5).each do |rating| %>
+  <strong><%= rating %> Star:</strong> <%= @post.ratings.where(value: rating).count %><br>
+<% end %>
+
+
+<h3>Rate this Post:</h3>
+<%= form_for([@post, Rating.new], url: topic_post_ratings_path(@post.topic, @post), html: { id: 'rating-form' }) do |f| %>
+  <div class="value-rating">
+    <% (1..5).each do |rating| %>
+      <%= f.radio_button :value, rating, id: "rating_#{rating}" %>
+      <%= f.label "rating_#{rating}",'★', onclick: "submitRating(#{rating})" %>
+    <% end %>
+  </div>
+  <%= f.submit "Submit Rating" %>
+<% end %>
+
+<script>
+    function submitRating(rating) {
+        var form = document.getElementById('rating-form');
+        if (form) {
+            var ratingInput = form.querySelector('input[id="rating_' + rating + '"]');
+            if (ratingInput) {
+                ratingInput.checked = true;
+            }
+            form.submit();
+        }
+    }
+</script>
+
 
 <h2>Comments</h2>
 <%= link_to "View Comments", topic_post_comments_path(@post.topic, @post), class: "btn btn-primary" %>
