@@ -1,4 +1,12 @@
-<h1> Post title : <%= @post.post_title %></h1>
+<h1>Topic of this post : <%= @post.topic.title %></h1>
+<p>Post title : <%= @post.post_title %></p>
 <p>Post content : <%= @post.post_content %></p>
-<p>Topic of this post : <%= @post.topic.title %></p>
-<%= link_to 'New Post', new_topic_post_path(@post) %>
+<%= button_to "Destroy this post", topic_post_path(@post.topic, @post), method: :delete, class: "btn btn-danger"%>
+<%= link_to "Back to Posts", topic_posts_path(@post.topic) %>
+
+
+<h2>Comments</h2>
+<%= link_to "View Comments", topic_post_comments_path(@post.topic, @post), class: "btn btn-primary" %>
+
+
+

@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
 
   resources :topics do
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
   end
 
-  resources :posts
+  resources :tags do
+    member do
+      get 'posts', to: 'tags#posts', as: 'posts'
+    end
+  end
 
+  get '/all_posts', to: 'posts#all_posts'
 
 end

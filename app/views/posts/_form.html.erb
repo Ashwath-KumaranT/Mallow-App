@@ -9,6 +9,16 @@
     <%= f.text_area :post_content %>
   </div>
 
+  <div>
+    <%= f.label :tag_ids, 'Tags ', style: "display:inline" %>
+    <% Tag.all.each do |tag| %>
+      <div >
+        <%= check_box_tag 'post[tag_ids][]', tag.id, @post.tags.include?(tag), class: 'form-check-input' %>
+        <%= label_tag nil, tag.name %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="form-actions">
     <%= f.submit "Create post" %>
   </div>

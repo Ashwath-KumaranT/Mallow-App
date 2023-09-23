@@ -1,0 +1,49 @@
+<head>
+
+</head>
+<body>
+<!-- Search Form -->
+<div>
+  <%= form_tag tags_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by name" %>
+    <button type="submit" class="btn-search">
+      <i class="fas fa-search"></i>
+    </button>
+
+  <% end %>
+</div>
+
+<!-- Create Tag Form -->
+<div>
+  <%= form_with(model: Tag.new, url: tags_path, method: :post) do |form| %>
+    <div>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter tag name" %>
+      <div>
+        <%= form.submit "Create Tag", class: "btn-create" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- List of Tags -->
+<div>
+  <div>
+    <h1>Tags Available</h1>
+    <ul>
+      <% if @tags.present? %>
+        <% @tags.each do |tag| %>
+          <li>
+            <%= link_to tag.name, posts_tag_path(tag) %>
+            <br>
+          </li>
+        <% end %>
+      <% else %>
+        <li>
+          <h1>No tags Available</h1>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

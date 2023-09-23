@@ -1,0 +1,33 @@
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+<%#= form_with(model: [@post.topic, @post, @comment], method: :patch) do |form| %>
+  <%# if @post.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(topic.errors.count, "error") %> prohibited this comment from being saved:</h2>-->
+
+<!--      <ul>-->
+        <%# comment.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div class="form-group">-->
+    <%#= form.label :title %>
+<!--    <div class="form-control"> <%#= form.text_field :comment ,placeholder:"Enter the view of yours"%></div>-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary">Submit</button>-->
+<%# end%>
+
+
+<%#= form_with(model: [@post.topic, @post, @comment], local: true) do |form| %>
+<!--   Other form fields-->
+  <%#= form.hidden_field :topic_id, value: @topic.id %>
+  <%#= form.hidden_field :post_id, value: @post.id %>
+  <%#= form.submit 'Create Comment' %>
+<%# end %>
+<%= form_for([@topic, @post, @comment]) do |f| %>
+  <%= f.text_area :content, placeholder: 'Write a comment...' %>
+  <%= f.submit 'Submit Comment' %>
+<% end %>
+

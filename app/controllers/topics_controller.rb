@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    # @topic = Topic.find(params[:id])
+    @topic = Topic.find(params[:id])
   end
 
 
@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    head :no_content
+    redirect_to topics_path, notice: 'Post was successfully deleted.'
   end
 
   private

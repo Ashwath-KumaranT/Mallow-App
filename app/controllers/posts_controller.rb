@@ -1,15 +1,11 @@
 class PostsController < ApplicationController
-  before_action :set_topic, only: [:new, :create]
+  before_action :set_topic,  except: [:all_posts]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
 
   def index
-    if params[:topic_id].present?
       @topic = Topic.find(params[:topic_id])
       @posts = @topic.posts
-    else
-      @posts = Post.all
-    end
   end
 
 
@@ -17,7 +13,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = @topic.posts.new
+    # @post = @topic.posts.new
+    @post = @topic.posts.build
+    @post.tag_ids = []
+  end
+
+  def all_posts
+    @posts = Post.page(params[:page]).per(2)
+    # @posts = Post.all
   end
 
   def create
@@ -42,7 +45,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully deleted.'
+    redirect_to topic_posts_path(@post.topic), notice: 'Post was successfully deleted.'
   end
 
   private
@@ -55,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:post_title, :post_content,  :topic_id)
+    params.require(:post).permit(:post_title, :post_content,  :topic_id, tag_ids: [])
   end
 
 

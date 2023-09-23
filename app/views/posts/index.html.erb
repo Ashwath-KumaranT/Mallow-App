@@ -16,20 +16,20 @@
       <td><%= post.post_title %></td>
       <td><%= post.post_content %></td>
       <td>
-        <%= link_to 'Show', post, class: 'action-link' %>
+        <a href="posts/<%= post.id %>">Show</a>
       </td>
-       <td> <%= link_to 'Edit', edit_post_path(post), class: 'action-link' %>
+       <td> <%= link_to 'Edit', edit_topic_post_path(@topic, post), class: 'action-link' %>
        </td>
       <td>
-        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'action-link' %>
+
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New Post', new_post_path, class: 'btn' %>
-
+<%= link_to 'New Post', new_topic_post_path(@topic, @post) %>
+<%= link_to 'Back to topics', topics_path %>
 <style>
     /* CSS for the table */
     .posts-table {

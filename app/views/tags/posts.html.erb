@@ -1,0 +1,11 @@
+
+  <div >
+    <h1>Posts with Tag: <%= @tag.name %></h1>
+    <ul >
+      <% @posts.each do |post| %>
+        <li >
+          <%= link_to post.post_title, topic_post_path(post.topic, post) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>

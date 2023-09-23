@@ -1,0 +1,17 @@
+<h1>Comments for the post now</h1>
+<%= link_to 'Add new Comment', new_topic_post_comment_path, class: 'btn' %>
+
+<ol>
+  <% @comments.each do |c| %>
+    <li>
+      <p><%= c.content %></p>
+      <%#= link_to 'Edit this comment', edit_topic_post_comment_path(@topic, @post, c) %>
+      <%#= link_to 'Edit Comment', edit_comment_path(@post, comment) %>
+
+    </li>
+  <% end %>
+</ol>
+
+
+<br>
+<p><%= link_to 'Back', topic_post_path(@topic, @post), class: 'btn' %></p>
