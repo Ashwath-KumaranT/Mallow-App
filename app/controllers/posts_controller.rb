@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @topic.posts.new(post_params)
+    @post.image.attach(params[:post][:image]) if params[:post][:image]
       if @post.save
        redirect_to topic_post_url(@topic, @post), notice: "Post was successfully created."
       else
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      @post.image.attach(params[:post][:image]) if params[:post][:image]
       redirect_to @post, notice: 'Post was successfully updated.'
     else
       render :edit

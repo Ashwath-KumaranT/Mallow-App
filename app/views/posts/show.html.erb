@@ -34,9 +34,31 @@
     }
 </script>
 
+<div class="image-container">
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, class: 'centered-image' %>
+  <% else %>
+    <p>No image attached.</p>
+  <% end %>
+</div>
+
 
 <h2>Comments</h2>
 <%= link_to "View Comments", topic_post_comments_path(@post.topic, @post), class: "btn btn-primary" %>
 
+<style>
+    /* Center the image */
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px; /* Adjust the height as needed */
+    }
 
+    .centered-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+</style>
 

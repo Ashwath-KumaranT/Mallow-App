@@ -1,6 +1,17 @@
 <%= link_to 'Create new topic', new_topic_path, class: "btn" %>
 <%= link_to 'View all tags', tags_path %>
 <%= link_to 'All posts', all_posts_path %>
+<nav>
+  <% if user_signed_in? %>
+    <li class="nav-item">
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+    </li>
+  <% else%>
+    <li class="nav-item">
+      <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+    </li>
+  <% end %>
+</nav>
 <table class="topics-table">
   <thead>
   <tr>
@@ -29,6 +40,8 @@
   <% end %>
   </tbody>
 </table>
+
+
 
 <style>
     /* CSS for the table */
