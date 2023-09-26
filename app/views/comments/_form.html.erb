@@ -26,7 +26,13 @@
   <%#= form.hidden_field :post_id, value: @post.id %>
   <%#= form.submit 'Create Comment' %>
 <%# end %>
-<%= form_for([@topic, @post, @comment]) do |f| %>
+<%#= form_for([@topic, @post, @comment]) do |f| %>
+  <%#= f.text_area :content, placeholder: 'Write a comment...' %>
+  <%#= f.submit 'Submit Comment' %>
+<%# end %>
+
+
+<%= form_for([@topic, @post, @comment], url: topic_post_comments_path(@topic, @post)) do |f| %>
   <%= f.text_area :content, placeholder: 'Write a comment...' %>
   <%= f.submit 'Submit Comment' %>
 <% end %>

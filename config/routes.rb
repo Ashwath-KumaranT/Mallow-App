@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   end
 
   get '/all_posts', to: 'posts#all_posts'
-
+  resources :posts
 end

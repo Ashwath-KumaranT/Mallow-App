@@ -1,11 +1,13 @@
 <%= link_to 'Create new topic', new_topic_path, class: "btn" %>
 <%= link_to 'View all tags', tags_path %>
 <%= link_to 'All posts', all_posts_path %>
+
 <nav>
   <% if user_signed_in? %>
-    <li class="nav-item">
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-    </li>
+    <ul>
+      <p>Welcome, <%= current_user.email %></p>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+    </ul>
   <% else%>
     <li class="nav-item">
       <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
@@ -17,6 +19,7 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
+    <th>User</th>
     <th>Edit the topic</th>
     <th>Delete the topic</th>
     <th>Create post under this topic</th>
@@ -27,8 +30,13 @@
     <tr>
       <td><%= topic.title %></td>
       <td><%= topic.description %></td>
+      <td><%= topic.user.email %></td>
       <td>
-        <%= link_to 'Edit', edit_topic_path(topic) %>
+        <% if can? :update, topic %>
+          <%= link_to 'Edit Topic', edit_topic_path(topic) %>
+        <%else%>
+          <h6>You cannot edit this topic</h6>
+        <% end %>
       </td>
       <td>
         <%= link_to 'Show', topic_path(topic) %>

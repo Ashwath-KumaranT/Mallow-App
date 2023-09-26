@@ -1,5 +1,28 @@
 <h1>Edit Post</h1>
 
-<%= render 'form' %>
+<%= form_with(model: [@topic, @post], url: topic_post_path(@topic, @post), method: :patch, class: 'my-4') do |form| %>
+  <div class="mb-3">
+    <%= form.label :post_title, class: 'form-label' %>
+    <%= form.text_field :post_title, class: 'form-control' %>
+  </div>
 
-<%#= link_to 'Back', topic_posts_path(@posts) %>
+  <div class="mb-3">
+    <%= form.label :post_content, class: 'form-label' %>
+    <%= form.text_area :post_content, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :tag_ids, 'Tags', class: 'form-label' %>
+    <% Tag.all.each do |tag| %>
+      <div class="form-check">
+        <%= check_box_tag 'post[tag_ids][]', tag.id, @post.tag_ids.include?(tag.id), class: 'form-check-input' %>
+        <%= label_tag nil, tag.name, class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit 'Update Post', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<%= link_to 'Back', topic_posts_path %>

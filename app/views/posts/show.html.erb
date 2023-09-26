@@ -1,7 +1,17 @@
 <h1>Topic of this post : <%= @post.topic.title %></h1>
 <p>Post title : <%= @post.post_title %></p>
 <p>Post content : <%= @post.post_content %></p>
-<%= button_to "Destroy this post", topic_post_path(@post.topic, @post), method: :delete, class: "btn btn-danger"%>
+<% if can? :destroy, @post %>
+  <%= button_to "Destroy this post", topic_post_path(@post.topic, @post), method: :delete, class: "btn btn-danger"%>
+<%else%>
+  <h6>You cannot destroy this post</h6>
+<% end %>
+<% if can? :update, @post %>
+  <%= link_to 'Edit', edit_topic_post_path(@post.topic, @post), class: 'action-link' %>
+<%else%>
+  <h6>You cannot edit this post</h6>
+<% end %>
+
 <%= link_to "Back to Posts", topic_posts_path(@post.topic) %>
 
 <h2>Existing Ratings:</h2>

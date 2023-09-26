@@ -4,8 +4,16 @@
 <ol>
   <% @comments.each do |c| %>
     <li>
+      <p><%= c.user.email %></p>
       <p><%= c.content %></p>
-      <%#= link_to 'Edit this comment', edit_topic_post_comment_path(@topic, @post, c) %>
+      <% if can? :update, c %>
+        <%= link_to 'Edit this comment', edit_topic_post_comment_path(@topic, @post, c) %>
+      <%else%>
+        <h6>You cannot update this comment</h6>
+      <% end %>
+
+
+
       <%#= link_to 'Edit Comment', edit_comment_path(@post, comment) %>
 
     </li>

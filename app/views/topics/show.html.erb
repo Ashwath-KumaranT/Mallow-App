@@ -1,3 +1,11 @@
 <h1><%= @topic.title %></h1>
 <p><%= @topic.description %></p>
-<%= button_to "Destroy this topic", @topic, method: :delete %><br>
+
+<% if can? :destroy, @topic %>
+  <%= button_to "Destroy this topic", @topic, method: :delete %><br>
+<%else%>
+  <h6>You cannot destroy this topic</h6>
+<% end %>
+
+
+

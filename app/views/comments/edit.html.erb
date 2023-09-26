@@ -1,5 +1,10 @@
 <h2>Edit Comment</h2>
-<%= render 'form' %>
+
+<%= form_for([@topic, @post, @comment]) do |f| %>
+  <%= f.text_area :content, placeholder: 'Edit your comment...' %>
+  <%= f.submit 'Update Comment' %>
+<% end %>
+
 <!-- app/views/comments/edit.html.erb -->
 <%#= form_for([@post.topic, @post, @comment]) do |f| %>
   <%#= f.text_area :content, placeholder: 'Edit your comment...' %>
