@@ -9,6 +9,7 @@
     <th>View the post</th>
     <th>No of comments</th>
     <th>Average ratings</th>
+    <th>Read status</th>
   </tr>
   </thead>
   <tbody>
@@ -26,6 +27,9 @@
        </td>
       <td>
         <%= post.average_rating %>
+      </td>
+      <td>
+        <%= post.marked_as_read?(current_user) ? 'Readed' : 'Unreaded' %>
       </td>
     </tr>
   <% end %>

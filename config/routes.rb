@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :posts do
+      patch 'mark_as_read', on: :member
       resources :comments
       resources :ratings, only: [:create]
     end
