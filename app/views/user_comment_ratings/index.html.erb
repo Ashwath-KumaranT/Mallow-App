@@ -1,0 +1,11 @@
+<h1>All Ratings</h1>
+
+<ul>
+  <% @ratings.each do |rating| %>
+    <li>
+      <strong>User:</strong> <%= rating.user.email %>,
+      <strong>Comment:</strong> <%= rating.comment.content %>,
+      <strong>Rating:</strong> <%= rating.rating %>
+    </li>
+  <% end %>
+</ul>

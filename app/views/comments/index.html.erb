@@ -11,8 +11,15 @@
       <%else%>
         <h6>You cannot update this comment</h6>
       <% end %>
+      <%= link_to "Rate this comment", new_topic_post_comment_user_comment_rating_path(c.post.topic, c.post, c), remote: true %>
+      <%#= form_for([@topic, @post, @comment, user_comment_rating.new], url: topic_post_comment_user_comment_ratings_path(@comment.post.topic, @comment.post, @comment)) do |f| %>
+<!--        <div class="form-group">-->
+          <%#= f.label :rating %>
+          <%#= f.select :rating, (1..5).to_a, prompt: 'Select a rating' %>
+<!--        </div>-->
 
-
+        <%#= f.submit 'Rate Comment', class: 'btn btn-primary' %>
+      <%# end %>
 
       <%#= link_to 'Edit Comment', edit_comment_path(@post, comment) %>
 

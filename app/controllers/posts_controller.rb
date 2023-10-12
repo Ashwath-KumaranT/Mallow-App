@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   def index
       @topic = Topic.find(params[:topic_id])
       @posts = @topic.posts
-
   end
 
   def mark_as_read
@@ -42,12 +41,14 @@ class PostsController < ApplicationController
     @post = @topic.posts.build(post_params)
     @post.user = current_user
     @post.image.attach(params[:post][:image]) if params[:post][:image]
+    respond_to do |format|
       if @post.save
-       redirect_to topic_post_url(@topic, @post), notice: "Post was successfully created."
+        format.html { redirect_to topic_posts_path, notice: 'Post was successfully created.' }
       else
-          render :new, status: :unprocessable_entity, notice: "Post not saved"
+        format.html { render :new }
       end
     end
+  end
 
   def edit
     authorize! :update, @post

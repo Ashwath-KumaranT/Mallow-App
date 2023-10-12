@@ -35,5 +35,7 @@ class Ability
       comment.user == user
     end
 
+    can :mark_as_read, Post
+
   end
 end

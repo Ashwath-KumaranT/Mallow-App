@@ -1,0 +1,50 @@
+<%# if @post.errors.any? %>
+// Display error messages in the browser
+//var errorMessage = '<%= j render partial: "shared/errors", locals: { record: @post } %>';
+//alert(errorMessage);
+<%# else %>
+// Display success message in the browser
+//alert('Post created successfully');
+<%# end %>
+
+<%# if @post.errors.any? %>
+// Error handling - Display error messages
+//var errorMessages = "<ul>";
+<%# @post.errors.full_messages.each do |message| %>
+//errorMessages += "<li><%= j message %></li>";
+<%# end %>
+//errorMessages += "</ul>";
+//$("#error-messages").html(errorMessages).fadeIn();
+<%# else %>
+// Success handling - Display success message
+//$("#success-message").html("Post created successfully").fadeIn();
+<%# end %>
+//$.ajax({
+//    url: '/posts',
+//    method: 'POST',
+//    data: {
+//        title: 'Your Title',
+//        content: 'Your Content'
+//    },
+//    success: function(response) {
+//        // Handle success here
+//        console.log('Success:', response);
+//    },
+//    error: function(xhr, status, error) {
+//        // Handle error here
+//        console.log('Error:', error);
+//    }
+//});
+
+
+// Log a message to the console
+console.log("Post created successfully");
+
+// You can also log the response data if needed
+//console.log("<%= j @post.to_json %>");
+
+// Optionally, you can perform additional actions, such as updating the page content
+// Example: Refresh the page after a delay
+//setTimeout(function() {
+//    location.reload();
+//}, 2000); // Reload the page after 2 seconds (adjust the delay as needed)

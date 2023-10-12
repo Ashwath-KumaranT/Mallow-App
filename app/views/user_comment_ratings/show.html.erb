@@ -1,0 +1,17 @@
+<!-- user_comment_ratings/show.html.erb -->
+<h3>Ratings for the Comment:</h3>
+<p><strong>Comment:</strong> <%= @comment.content %></p>
+
+<% if @ratings.any? %>
+  <ul>
+    <% @ratings.each do |rating| %>
+      <li>
+        <strong>User:</strong> <%= rating.user.email %>
+        <br>
+        <strong>Rating:</strong> <%= rating.rating %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No ratings for this comment yet.</p>
+<% end %>

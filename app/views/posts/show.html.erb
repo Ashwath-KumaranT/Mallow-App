@@ -1,3 +1,8 @@
+<head>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+</head>
+
+<body>
 <h1>Topic of this post : <%= @post.topic.title %></h1>
 <p>Post title : <%= @post.post_title %></p>
 <p>Post content : <%= @post.post_content %></p>
@@ -14,25 +19,34 @@
 
 <%= link_to "Back to Posts", topic_posts_path(@post.topic) %>
 
-
+<!--AJAX-->
 <script>
-    $(document).ready(function() {
-        // Check if the user is logged in
-        var loggedIn = <%= user_signed_in? %>;
+    document.addEventListener('DOMContentLoaded', () => {
+        const loggedIn = <%= user_signed_in? %>;
 
-        // Make an AJAX call to mark the post as read if the user is logged in
         if (loggedIn) {
-            $.ajax({
-                url: "/posts/<%= @post.id %>/mark_as_read",
-                type: "PATCH",
-                success: function(response) {
-                    console.log("Post marked as read");
-                    // You can update the UI as needed
-                },
-                error: function(error) {
-                    console.error("Error marking post as read");
+            const postId = <%= @post.id %>;
+            const url = `/topics/<%= @post.topic.id %>/posts/${postId}/mark_as_read`;
+
+            // Get the CSRF token from the meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': csrfToken  // Include the CSRF token in the headers
                 }
-            });
+            })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  console.log('Post marked as read');
+                  // Update the UI as needed
+              })
+              .catch(error => {
+                  console.error('Error marking post as read:', error.message);
+              });
         }
     });
 </script>
@@ -85,6 +99,8 @@
 
 <h2>Comments</h2>
 <%= link_to "View Comments", topic_post_comments_path(@post.topic, @post), class: "btn btn-primary" %>
+
+</body>
 
 <style>
     /* Center the image */

@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  root 'topics#index'
   resources :topics do
     resources :posts do
       patch 'mark_as_read', on: :member
-      resources :comments
+      resources :comments do
+        resources :user_comment_ratings
+      end
       resources :ratings, only: [:create]
     end
   end
