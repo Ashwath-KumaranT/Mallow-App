@@ -1,11 +1,60 @@
 <h1>All Ratings</h1>
 
-<ul>
+<table class="table">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Comment</th>
+    <th>Rating</th>
+  </tr>
+  </thead>
+  <tbody>
   <% @ratings.each do |rating| %>
-    <li>
-      <strong>User:</strong> <%= rating.user.email %>,
-      <strong>Comment:</strong> <%= rating.comment.content %>,
-      <strong>Rating:</strong> <%= rating.rating %>
-    </li>
+    <tr>
+      <td><%= rating.user.email %></td>
+      <td><%= rating.comment.content %></td>
+      <td><%= rating.rating %></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
+
+<%= link_to "Back to Comments", topic_post_comments_path(@topic, @post, @comment), class: "btn btn-secondary" %>
+<style>
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    /* Button Style */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .btn-secondary {
+        background-color: #6C757D;
+    }
+
+</style>

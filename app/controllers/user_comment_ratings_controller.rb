@@ -21,10 +21,10 @@ class UserCommentRatingsController < ApplicationController
   end
 
   def index
-    # @topic = Topic.find(params[:topic_id])
-    # @post = @topic.posts.find(params[:post_id])
-    # @comment = @post.comments.find(params[:comment_id])
-    @ratings = UserCommentRating.all
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+    @comment = @post.comments.find(params[:comment_id])
+    @ratings = @comment.user_comment_ratings
   end
 
   private

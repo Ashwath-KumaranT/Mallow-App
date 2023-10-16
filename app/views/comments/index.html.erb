@@ -1,32 +1,84 @@
-<h1>Comments for the post now</h1>
 <%= link_to 'Add new Comment', new_topic_post_comment_path, class: 'btn' %>
+<h1>Comments</h1>
 
-<ol>
-  <% @comments.each do |c| %>
-    <li>
-      <p><%= c.user.email %></p>
-      <p><%= c.content %></p>
-      <% if can? :update, c %>
-        <%= link_to 'Edit this comment', edit_topic_post_comment_path(@topic, @post, c) %>
-      <%else%>
-        <h6>You cannot update this comment</h6>
-      <% end %>
-      <%= link_to "Rate this comment", new_topic_post_comment_user_comment_rating_path(c.post.topic, c.post, c), remote: true %>
-      <%#= form_for([@topic, @post, @comment, user_comment_rating.new], url: topic_post_comment_user_comment_ratings_path(@comment.post.topic, @comment.post, @comment)) do |f| %>
-<!--        <div class="form-group">-->
-          <%#= f.label :rating %>
-          <%#= f.select :rating, (1..5).to_a, prompt: 'Select a rating' %>
-<!--        </div>-->
-
-        <%#= f.submit 'Rate Comment', class: 'btn btn-primary' %>
-      <%# end %>
-
-      <%#= link_to 'Edit Comment', edit_comment_path(@post, comment) %>
-
-    </li>
+<table class="table">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Comment</th>
+    <th>Rate Comment</th>
+    <th>View Ratings</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @comments.each do |comment| %>
+    <tr>
+      <td><strong><%= comment.user.email %>:</strong></td>
+      <td><%= comment.content %></td>
+      <td>
+        <%= form_for([@topic, @post, comment, UserCommentRating.new], url: topic_post_comment_user_comment_ratings_path(@topic, @post, comment), remote: true) do |f| %>
+          <%= f.hidden_field :comment_id, value: comment.id %>
+          <div class="form-group">
+            <%= f.label :rating %>
+            <%= f.select :rating, (1..5).to_a, prompt: 'Select a rating' %>
+          </div>
+          <%= f.submit 'Rate Comment', class: 'btn btn-primary' %>
+        <% end %>
+      </td>
+      <td><%= link_to 'View Ratings', topic_post_comment_user_comment_ratings_path(@topic, @post, comment) %></td>
+    </tr>
   <% end %>
-</ol>
-
-
+  </tbody>
+</table>
 <br>
 <p><%= link_to 'Back', topic_post_path(@topic, @post), class: 'btn' %></p>
+<style>
+    /* Add this to your CSS file */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin: 20px 0;
+        font-size: 16px;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #d9edf7;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 6px 0;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: #007bff;
+        color: #fff;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        border: 1px solid #0056b3;
+    }
+
+</style>
