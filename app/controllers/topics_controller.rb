@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
   #   # render json: { head: :no_content }
   # end
   def destroy
-    # authorize! :destroy, @topic
+    authorize! :destroy, @topic
     @topic.destroy
     respond_to do |format|
       format.html { redirect_to topics_url, notice: "Topic #{@topic.title} was successfully destroyed." }

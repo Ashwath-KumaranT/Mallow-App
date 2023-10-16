@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def index
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    @comments = @post.comments
+    @comments = Comment.includes(:user).where(post_id: params[:post_id])
   end
 
   def new
