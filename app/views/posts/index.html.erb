@@ -1,11 +1,21 @@
 <h1>Posts</h1>
+<%= form_tag(topic_posts_path(@topic), method: "get") do %>
+  <%= label_tag "From Date:" %>
+  <%= date_field_tag :from_date, params[:from_date] %>
 
+  <%= label_tag "To Date:" %>
+  <%= date_field_tag :to_date, params[:to_date] %>
+
+  <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+<% end %>
 <table class="posts-table">
   <thead>
   <tr>
     <th>Title</th>
     <th>Content</th>
     <th>User</th>
+    <th>Created at</th>
+    <th>Last update</th>
     <th>View the post</th>
     <th>No of comments</th>
     <th>Average ratings</th>
@@ -18,6 +28,15 @@
       <td><%= post.post_title %></td>
       <td><%= post.post_content %></td>
       <td><%= post.user.email %></td>
+      <td><%= post.created_at.strftime('%d/%m/%y') %></td>
+      <td>
+        <% time_difference = (Time.now - post.updated_at) / 3600 %>
+        <% if time_difference < 24 %>
+          <%= time_difference.round(0) %> hour(s) ago
+        <% else %>
+          <%= (time_difference / 24).round(0) %> day(s) ago
+        <% end %>
+      </td>
       <td>
         <a href="posts/<%= post.id %>">Show</a>
       </td>

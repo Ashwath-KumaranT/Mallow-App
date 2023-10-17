@@ -6,6 +6,9 @@ class PostsController < ApplicationController
   def index
       @topic = Topic.find(params[:topic_id])
       @posts = @topic.posts
+      from_date = params[:from_date].present? ? Date.parse(params[:from_date]) : 1.day.ago.to_date
+      to_date = params[:to_date].present? ? Date.parse(params[:to_date]) : Date.today
+      @posts = @posts.filtered_by_date(from_date, to_date)
   end
 
   def mark_as_read

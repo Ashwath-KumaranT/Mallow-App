@@ -21,6 +21,11 @@ class Post < ApplicationRecord
     ratings_average || 0
   end
 
+  # scope
+  scope :filtered_by_date, ->(from_date, to_date) {
+    where(created_at: from_date.beginning_of_day..to_date.end_of_day)
+  }
+
   # AjAX
   validates :post_title, length: {maximum: 20, message: 'Title should be lesser than 20 character'}
 end

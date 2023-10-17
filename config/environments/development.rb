@@ -33,15 +33,15 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.after_initialize do
-
-    Bullet.raise = true
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    # Raise an error if N+1 query is detected
-  end
+  # config.after_initialize do
+  #
+  #   Bullet.raise = true
+  #   Bullet.enable = true
+  #   Bullet.alert = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.console = true
+  #   # Raise an error if N+1 query is detected
+  # end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
