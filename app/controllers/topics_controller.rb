@@ -29,7 +29,7 @@ class TopicsController < ApplicationController
   # end
   def create
     @topic = Topic.new(topic_params)
-    @topic.user_id = 1
+    @topic.user = current_user
     respond_to do |format|
       if @topic.save
         format.html { redirect_to topics_path, notice: 'Topic was successfully created.' }
@@ -105,7 +105,7 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title, :description)
+    params.require(:topic).permit(:title, :description, :user_id)
   end
 
 end

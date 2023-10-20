@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <h1>Posts</h1>
 <%= form_tag(topic_posts_path(@topic), method: "get") do %>
   <%= label_tag "From Date:" %>
@@ -41,14 +43,23 @@
         <a href="posts/<%= post.id %>">Show</a>
       </td>
        <td>
-        <% @count = post.comments.count %>
+        <% @count = post.comments_count %>
          <%= @count %>
        </td>
       <td>
-        <%= post.average_rating %>
+        <% if post.ratings_count.present? && post.ratings_count > 0 %>
+        <%  @avg =  post.ratings.sum(:value) / post.ratings_count %>
+          <%= @avg.round(4) %>
+        <% else %>
+          No ratings yet
+        <% end %>
       </td>
       <td>
-        <%= post.marked_as_read?(current_user) ? 'Readed' : 'Un-readed' %>
+        <% if post.marked_as_read?(current_user) %>
+          <i class="fas fa-check-circle" style="color: green;"></i> Read
+        <% else %>
+          <i class="far fa-circle" style="color: red;"></i> Unread
+        <% end %>
       </td>
     </tr>
   <% end %>
