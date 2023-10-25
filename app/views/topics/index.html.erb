@@ -2,18 +2,24 @@
 <%= link_to 'View all tags', tags_path %>
 <%= link_to 'All posts', all_posts_path %>
 
-<nav>
-  <% if user_signed_in? %>
-    <ul>
-      <p>Welcome, <%= current_user.email %></p>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
-    </ul>
-  <% else%>
-    <li class="nav-item">
-      <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-    </li>
-  <% end %>
-</nav>
+<!--<nav>-->
+  <%# if user_signed_in? %>
+<!--    <ul>-->
+<!--      <p>Welcome, <%#= current_user.email %></p>-->
+      <%#= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+<!--      <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+        <%#= image_tag('avatar.jpg', alt: 'User Avatar', width: '40px', height: '40px') %>
+<!--      </a>-->
+<!--    </ul>-->
+  <%# else%>
+<!--    <li class="nav-item">-->
+      <%#= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+<!--    </li>-->
+  <%# end %>
+<!--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--    Edit the profile-->
+<!--  </button>-->
+<!--</nav>-->
 <table class="topics-table">
   <thead>
   <tr>
