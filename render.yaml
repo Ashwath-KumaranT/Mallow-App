@@ -1,7 +1,7 @@
 databases:
   - name: mallowapp
-    databaseName: mallowapp_bucl
-    user: mallowapp_bucl_user
+    databaseName: mallowapp_1t8d
+    user: mallowapp_1t8d_user
 
 services:
   - type: web
@@ -12,7 +12,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mallowapp_bucl
+          name: mallowapp_1t8d
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
